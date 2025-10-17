@@ -1,16 +1,6 @@
-// Métodos HTTP
-// GET, POST, PUT, PATCH, DELETE
-
-// GET => Buscar um recurso do back-end
-// POST => Criar um recurso no back-end
-// PUT => Atualizar um recurso no back-end
-// PATCH => Atualizar uma informação específica de um recurso no back-end
-// DELETE => Deletar um recurso do back-end
-
-// GET /users => Buscando usuários no back-end | Exemplo: GET /users?id=123 --- GET /users?status=ativo
-// POST /users => Criar um usuário no back-end
-
 import http from 'node:http'
+
+const users = []
 
 const server = http.createServer((request, response) => {
     const {method, url} = request
@@ -18,10 +8,19 @@ const server = http.createServer((request, response) => {
     if(method === 'GET' && url === '/users'){
 
         // Early Return
-        return response.end('Listagem de Usuários')
+        return response
+        .setHeader('Content-type', 'application/json')
+        .end(JSON.stringify(users))
     }
 
     if (method === 'POST' && url === '/users'){
+
+        users.push({
+            id: '1',
+            name: 'John Doe',
+            email: 'email@example.com',
+        })
+
         return response.end('Criação de Usuários')
     }
 
