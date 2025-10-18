@@ -21,10 +21,10 @@ const server = http.createServer((request, response) => {
             email: 'email@example.com',
         })
 
-        return response.end('Criação de Usuários')
+        return response.writeHead(201).end()
     }
 
-  return response.end('Hello World')
+  return response.writeHead(404).end('Not Found')
 })
 
 server.listen(3333)
